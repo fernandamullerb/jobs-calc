@@ -1,7 +1,7 @@
 module.exports = {
     remainingDays(job) {
         const remainingDays = (job["total-hours"] / job["daily-hours"]).toFixed()
-    
+
         const createdDate = new Date(job.created_at)
 
         const dueDay = createdDate.getDate() + Number(remainingDays)
