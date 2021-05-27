@@ -27,70 +27,72 @@
 
 </head>
 
-<body id="page-job-edit">
+<%- include('parts/page-header', {title: 'Editar Perfil' }) %>
 
-  <%- include('parts/page-header', {title: 'Editar Job' }) %>
+  <div class="container flex animate-up delay-2">
 
-    <div class="container flex animate-up delay-2">
 
-      <form id="form-job" method="post" action="/job/<%= job.id %> ">
-        <fieldset>
-          <legend>Dados do Job</legend>
-          <div class="separator light"></div>
+    <form id="form-job"
+          method="post"
+          action="/job/<%= job.id %> ">
+
+      <fieldset>
+        <legend>Dados do Job</legend>
+        <div class="separator light"></div>
+
+        <div class="input-wrapper">
+          <label for="name">Nome do Job</label>
+          <input type="text" id="name" name="name" value="<%= job.name %> " />
+        </div>
+
+        <div class="input-group">
+          <div class="input-wrapper">
+            <label for="daily-hours">Quantas horas <br />
+              por dia vai dedicar ao job?</label>
+            <input type="number" step="0.1" id="daily-hours" name="daily-hours" value="<%= job["daily-hours"] %>"/>
+          </div>
 
           <div class="input-wrapper">
-            <label for="name">Nome do Job</label>
-            <input type="text" id="name" name="name" value="<%= job.name %>" />
+            <label for="total-hours">Estimativa de <br />
+              horas para esse Job?</label>
+            <input type="number" id="total-hours" name="total-hours" value="<%= job["total-hours"] %>" />
           </div>
-
-          <div class="input-group">
-            <div class="input-wrapper">
-              <label for="daily-hours">Quantas horas <br />
-                por dia vai dedicar ao job?</label>
-              <input type="number" step="0.1" id="daily-hours" name="daily-hours" value="<%=job[" daily-hours"]%>"/>
-            </div>
-
-            <div class="input-wrapper">
-              <label for="total-hours">Estimativa de <br />
-                horas para esse Job?</label>
-              <input type="number" id="total-hours" name="total-hours" value="<%=job[" total-hours"]%>"/>
-            </div>
-          </div>
-        </fieldset>
-
-      </form>
-      </main>
-      <aside class="card">
-        <img src="/images/money-color.svg" alt="Imagem de Dinheiro">
-        <p>
-          O valor do projeto ficou em <strong>R$ <%= job.budget.toFixed(2).replace(".",",") %> </strong>
-        </p>
-        <div class="button-group">
-          <button class="button green" form="form-job" type="submit" title="Salvar Dados">Salvar</button>
-          <a href="#" class="button gray open-modal">
-            <img src="/images/trash-24.svg" alt="Cancelar cadastro" title="Cancelar cadastro">
-          </a>
         </div>
-      </aside>
+      </fieldset>
 
-    </div>
-    <!-- end container -->
-
-    <div class="modal-wrapper">
-      <div class="modal">
-        <img src="/images/trash-48.svg" alt="Excluir Job" title="Excluir Job" />
-        <h3>Excluir Job</h3>
-        <p>Quer mesmo excluir esse job? <br />
-          Ele será apagado para sempre.
-        </p>
-        <footer>
-          <a class="button gray" href="#">Cancelar</a>
-          <button class="button red" type="submit" form="delete-job">Excluir Job</button>
-        </footer>
+    </form>
+    </main>
+    <aside class="card">
+      <img src="/images/money-color.svg" alt="Imagem de Dinheiro">
+      <p>
+        O valor do projeto ficou em <strong>R$ <%= job.budget.toFixed(2).replace('.',',') %> </strong>
+      </p>
+      <div class="button-group">
+        <button class="button green" form="form-job" type="submit" title="Salvar Dados">Salvar</button>
+        <a href="#" class="button gray open-modal">
+          <img src="/images/trash-24.svg" alt="Cancelar cadastro" title="Cancelar cadastro">
+        </a>
       </div>
-      <form method="post" action="/job/delete/<%= job.id %> " id="delete-job"></form>
+    </aside>
+
+  </div>
+  <!-- end container -->
+
+  <div class="modal-wrapper">
+    <div class="modal">
+      <img src="/images/trash-48.svg" alt="Excluir Job" title="Excluir Job" />
+      <h3>Excluir Job</h3>
+      <p>Quer mesmo excluir esse job? <br />
+        Ele será apagado para sempre.
+      </p>
+      <footer>
+        <a class="button gray" href="#">Cancelar</a>
+        <button class="button red" type="submit" form="delete-job">Excluir Job</button>
+      </footer>
     </div>
-    <!-- end modal-wrapper -->
-</body>
+    <form method="post" action="/job/delete/<%= job.id %>" id="delete-job"></form>
+  </div>
+  <!-- end modal-wrapper -->
+  </body>
 
 </html>
